@@ -1,14 +1,20 @@
 # A Twitch UI Helper
 
+## Dev
 
-## How to fork a template like this
+### How to load this Chrome Extension
 
-This extension was initialized by Extensionizr:
+1. `git clone` this project
 
-`http://extensionizr.com/!#{"modules":["hidden-mode","with-bg","with-persistent-bg","no-options","no-override"],"boolean_perms":[],"match_ptrns":[]}`
+2. Visit `chrome://extensions` in your browser.
 
+3. Ensure that the **Developer mode** checkbox in the top right-hand corner is checked.
 
-## Backend
+4. Click **Load unpacked extension…** to pop up a file-selection dialog.
+
+5. Navigate to this repo directory and select the `build` folder.
+
+### Backend
 
 It will retrieve information from backend server via http connection. (given user name and channel name)
 
@@ -17,3 +23,7 @@ It will retrieve information from backend server via http connection. (given use
 No. This extension does not need any authority.
 
 It just get user name and channel name from the web source code.
+
+## Credits
+
+This extension was initialized by [Extensionizr](http://extensionizr.com/).
