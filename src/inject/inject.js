@@ -5,7 +5,7 @@ function setUserIdOnButton() {
         if ( raw_user_id.endsWith(")") ) {
             // has Asia Nickname
             raw_user_id = raw_user_id.split("(")[1]
-            user_id = raw_user_id.substring(0, raw_user_id.length - 2);
+            user_id = raw_user_id.substring(0, raw_user_id.length - 1);
             console.warn("[Asia Nick Name] user id = " + user_id)
         }
         else {
