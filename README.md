@@ -26,4 +26,11 @@ It just get user name and channel name from the web source code.
 
 ## Credits
 
+### Template
+
 This extension was initialized by [Extensionizr](http://extensionizr.com/).
+
+### arrive.js
+
+Watch element created by [arrive.j](https://github.com/uzairfarooq/arrive)
+

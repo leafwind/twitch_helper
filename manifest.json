@@ -31,8 +31,9 @@
         "https://*.twitch.tv/*"
       ],
       "js": [
-        "src/inject/inject.js", "js/jquery/jquery.min.js"
-      ]
+        "src/inject/inject.js", "js/jquery/jquery.min.js", "js/arrive.min.js"
+      ],
+      "run_at": "document_end"
     }
   ]
 }
