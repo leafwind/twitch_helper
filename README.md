@@ -32,5 +32,5 @@ This extension was initialized by [Extensionizr](http://extensionizr.com/).
 
 ### arrive.js
 
-Watch element created by [arrive.j](https://github.com/uzairfarooq/arrive)
+Watch element created by [arrive.js](https://github.com/uzairfarooq/arrive)
 
