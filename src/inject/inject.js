@@ -1,7 +1,7 @@
 function setUserIdOnButton() {
-    $(document).arrive(".chat-menu-content", function() {
-        var raw_user_id = $("div[class='chat-menu-content'").find("span.strong")[0].innerText
-        console.warn('[arrive]')
+    document.arrive("div[class=chat-menu-content] > div[class=ember-view] > span[class=strong]", {onceOnly: true, existing: true}, function() {
+        console.warn('[arrive] div[class=chat-menu-content] > div[class=ember-view] > span[class=strong]')
+        var raw_user_id = $("div[class=chat-menu-content]").find("span.strong")[0].innerText
         if ( raw_user_id.endsWith(")") ) {
             // has Asia Nickname
             raw_user_id = raw_user_id.split("(")[1]
@@ -20,14 +20,18 @@ function readyDo() {
     console.log("Hello. This message was sent from scripts/inject.js");
 
     // get channel from URL
-    var channel = $(location).attr('href').split('twitch.tv/')[1].split('/')[0]
+    var channel = $(location).attr('href').split('twitch.tv/')[1].split('/')[0];
+    console.log("channel: " + channel);
     
     // get the twitch chat botton
-    var chat_container = document.getElementsByClassName("js-chat-buttons chat-buttons-container clearfix")[0];
+    var chat_container = $(".js-chat-buttons.chat-buttons-container.clearfix")[0];
+    console.log("text of chat_container: " + chat_container.innerText);
     
     var newButton = document.createElement("button")
     newButton.className = "button float-left qa-chat-buttons__submit js-chat-buttons__submit"
     newButton.id = "twitch-helper-button"
+    newButton.innerText = 'loading..'
+    console.log("newButton.id: " + newButton.id)
     chat_container.insertBefore(newButton, chat_container.children[chat_container.children.length - 1]);
 
     setUserIdOnButton();
