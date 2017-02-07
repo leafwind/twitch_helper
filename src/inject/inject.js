@@ -1,7 +1,9 @@
 function setUserIdOnButton() {
-    document.arrive("div[class=chat-menu-content] > div[class=ember-view] > span[class=strong]", {onceOnly: true, existing: true}, function() {
-        console.warn('[arrive] div[class=chat-menu-content] > div[class=ember-view] > span[class=strong]')
-        var raw_user_id = $("div[class=chat-menu-content]").find("span.strong")[0].innerText
+    var selector = "div[class=chat-menu-content] > div[class=ember-view] > span[class=strong]"
+    document.arrive(selector, {onceOnly: true, existing: true}, function() {
+        console.warn('[arrive] ' + selector)
+        console.warn('[arrive] outerHTML: ' + $(selector)[0].outerHTML)
+        var raw_user_id = $(selector)[0].innerText
         if ( raw_user_id.endsWith(")") ) {
             // has Asia Nickname
             raw_user_id = raw_user_id.split("(")[1]
@@ -23,7 +25,7 @@ function readyDo() {
     var channel = $(location).attr('href').split('twitch.tv/')[1].split('/')[0];
     console.log("channel: " + channel);
     
-    // get the twitch chat botton
+    // get the twitch chat botton FIXME: use arrive to get chat_container
     var chat_container = $(".js-chat-buttons.chat-buttons-container.clearfix")[0];
     console.log("text of chat_container: " + chat_container.innerText);
     
