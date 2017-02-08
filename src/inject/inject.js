@@ -1,20 +1,31 @@
-function setUserIdOnButton() {
+function getTwitchChatButtonAndInsertBeforeIt(twitch_helper_button) {
+    var selector = ".js-chat-buttons.chat-buttons-container.clearfix"
+    document.arrive(selector, {onceOnly: true, existing: true}, function() {
+        var chat_container = $(selector)[0];
+        console.log('[arrive] chat_container, innerText: ' + chat_container.innerText);
+        chat_container.insertBefore( twitch_helper_button, chat_container.children[chat_container.children.length - 1]);
+    });
+
+}
+
+function getRealUserId(raw_user_id) {
+    if ( raw_user_id.endsWith(")") ) {
+        // has Asia Nickname
+        var user_id = raw_user_id.split('(')[1].split(')')[0]
+        console.warn("[Asia Nick Name] user id = " + user_id)
+        return user_id
+    }
+    else {
+        console.warn("[English ID] user id = " + raw_user_id)
+        return raw_user_id
+    }
+}
+
+function setUserIdOnHelperButton(twitch_helper_button) {
     var selector = "div[class=chat-menu-content] > div[class=ember-view] > span[class=strong]"
     document.arrive(selector, {onceOnly: true, existing: true}, function() {
-        console.warn('[arrive] ' + selector)
-        console.warn('[arrive] outerHTML: ' + $(selector)[0].outerHTML)
-        var raw_user_id = $(selector)[0].innerText
-        if ( raw_user_id.endsWith(")") ) {
-            // has Asia Nickname
-            raw_user_id = raw_user_id.split("(")[1]
-            user_id = raw_user_id.substring(0, raw_user_id.length - 1);
-            console.warn("[Asia Nick Name] user id = " + user_id)
-        }
-        else {
-            user_id = raw_user_id
-            console.warn("[English ID] user id = " + user_id)
-        }
-        $("#twitch-helper-button")[0].innerText = user_id
+        var raw_user_id_dom = $(selector)[0]
+        twitch_helper_button.innerText = getRealUserId(raw_user_id_dom.innerText)
     });
 }
 
@@ -25,19 +36,14 @@ function readyDo() {
     var channel = $(location).attr('href').split('twitch.tv/')[1].split('/')[0];
     console.log("channel: " + channel);
     
-    // get the twitch chat botton FIXME: use arrive to get chat_container
-    var chat_container = $(".js-chat-buttons.chat-buttons-container.clearfix")[0];
-    console.log("text of chat_container: " + chat_container.innerText);
-    
-    var newButton = document.createElement("button")
-    newButton.className = "button float-left qa-chat-buttons__submit js-chat-buttons__submit"
-    newButton.id = "twitch-helper-button"
-    newButton.innerText = 'loading..'
-    console.log("newButton.id: " + newButton.id)
-    chat_container.insertBefore(newButton, chat_container.children[chat_container.children.length - 1]);
+    // create a helper button
+    var twitch_helper_button = document.createElement("button")
+    twitch_helper_button.className = "button float-left qa-chat-buttons__submit js-chat-buttons__submit"
+    twitch_helper_button.id = "twitch-helper-button"
+    twitch_helper_button.innerText = 'loading..'
 
-    setUserIdOnButton();
-    // ----------------------------------------------------------
+    setUserIdOnHelperButton(twitch_helper_button);
+    getTwitchChatButtonAndInsertBeforeIt(twitch_helper_button);
 }
 
 chrome.extension.sendMessage({}, function(response) {
