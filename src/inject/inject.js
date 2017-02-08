@@ -21,11 +21,14 @@ function getRealUserId(raw_user_id) {
     }
 }
 
-function setUserIdOnHelperButton(twitch_helper_button) {
+function setUserIdOnHelperButton(twitch_helper_button, channel) {
     var selector = "div[class=chat-menu-content] > div[class=ember-view] > span[class=strong]"
     document.arrive(selector, {onceOnly: true, existing: true}, function() {
         var raw_user_id_dom = $(selector)[0]
-        twitch_helper_button.innerText = getRealUserId(raw_user_id_dom.innerText)
+        user_id = getRealUserId(raw_user_id_dom.innerText)
+        $.get("https://bot.leafwind.tw/signin?user=" + user_id + "&channel=" + channel, function(data, status){
+            twitch_helper_button.innerText = data.last_date + " / 第 " + data.count + " 次"
+        });
     });
 }
 
@@ -42,7 +45,7 @@ function readyDo() {
     twitch_helper_button.id = "twitch-helper-button"
     twitch_helper_button.innerText = 'loading..'
 
-    setUserIdOnHelperButton(twitch_helper_button);
+    setUserIdOnHelperButton(twitch_helper_button, channel);
     getTwitchChatButtonAndInsertBeforeIt(twitch_helper_button);
 }
 

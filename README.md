@@ -18,11 +18,17 @@
 
 It will retrieve information from backend server via http connection. (given user name and channel name)
 
+#### Debug
+
+* `No 'Access-Control-Allow-Origin' header is present on the requested resource.`
+    * try add your site in permissions in manifest.json
+
 ## Does this extension need my account authorization?
 
 No. This extension does not need any authority.
 
 It just get user name and channel name from the web source code.
+
 
 ## Credits
 

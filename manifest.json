@@ -1,6 +1,6 @@
 {
   "name": "Twitch Helper",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "manifest_version": 2,
   "description": "Twitch Helper: A slider when you watching Twitch.tv",
   "homepage_url": "http://bot.leafwind.tw",
@@ -15,7 +15,7 @@
     "persistent": true
   },
   "permissions": [
-    "https://*.twitch.tv/*"
+    "https://*.twitch.tv/*", "https://bot.leafwind.tw/*"
   ],
   "content_scripts": [
     {
