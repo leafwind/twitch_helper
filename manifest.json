@@ -1,6 +1,6 @@
 {
   "name": "Twitch Helper",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "manifest_version": 2,
   "description": "圖奇小幫手：顯示各種有用資訊（目前有打卡次數及最後簽到日期）",
   "homepage_url": "http://bot.leafwind.tw",
