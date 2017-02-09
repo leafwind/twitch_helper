@@ -38,6 +38,14 @@ function readyDo() {
     // get channel from URL
     var channel = $(location).attr('href').split('twitch.tv/')[1].split('/')[0];
     console.log("channel: " + channel);
+    var user_id;
+
+    if (window.Twitch.user.isLoggedIn()) {
+        user_id = window.Twitch.user.login();
+    }
+    else {
+        user_id = '';
+    }
 
     // create a helper button, lock to specific channel for now
     if(channel == "wow_tomato") {
@@ -46,7 +54,15 @@ function readyDo() {
         twitch_helper_button.id = "twitch-helper-button"
         twitch_helper_button.innerText = 'loading..'
 
-        setUserIdOnHelperButton(twitch_helper_button, channel);
+        if (user_id !== '') {
+            $.get("https://bot.leafwind.tw/signin?user=" + user_id + "&channel=" + channel, function(data, status){
+                twitch_helper_button.innerText = data.last_date + " / 第 " + data.count + " 次"
+            });
+        }
+        else {
+            twitch_helper_button.innerText = "please login."
+        }
+        //setUserIdOnHelperButton(twitch_helper_button, channel);
         getTwitchChatButtonAndInsertBeforeIt(twitch_helper_button);
     }
 }
@@ -56,7 +72,10 @@ chrome.extension.sendMessage({}, function(response) {
 	    if (document.readyState === "complete") {
 		    clearInterval(readyStateCheckInterval);
             console.warn("ready");
-            readyDo();
+            setTimeout(function() {
+                    readyDo();
+                }, 10000
+            );
 	    }
     }, 10);
 });
