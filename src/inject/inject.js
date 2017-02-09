@@ -38,15 +38,17 @@ function readyDo() {
     // get channel from URL
     var channel = $(location).attr('href').split('twitch.tv/')[1].split('/')[0];
     console.log("channel: " + channel);
-    
-    // create a helper button
-    var twitch_helper_button = document.createElement("button")
-    twitch_helper_button.className = "button float-left qa-chat-buttons__submit js-chat-buttons__submit"
-    twitch_helper_button.id = "twitch-helper-button"
-    twitch_helper_button.innerText = 'loading..'
 
-    setUserIdOnHelperButton(twitch_helper_button, channel);
-    getTwitchChatButtonAndInsertBeforeIt(twitch_helper_button);
+    // create a helper button, lock to specific channel for now
+    if(channel == "wow_tomato") {
+        var twitch_helper_button = document.createElement("button")
+        twitch_helper_button.className = "button float-left qa-chat-buttons__submit js-chat-buttons__submit"
+        twitch_helper_button.id = "twitch-helper-button"
+        twitch_helper_button.innerText = 'loading..'
+
+        setUserIdOnHelperButton(twitch_helper_button, channel);
+        getTwitchChatButtonAndInsertBeforeIt(twitch_helper_button);
+    }
 }
 
 chrome.extension.sendMessage({}, function(response) {
