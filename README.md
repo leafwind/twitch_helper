@@ -1,5 +1,9 @@
 # A Twitch UI Helper
 
+## Installation
+
+You can install via: [Chrome Web Store](https://chrome.google.com/webstore/detail/twitch-helper/edgphiiilapbafflfeflpoplimgphhgn?hl=zh-TW)
+
 ## Dev
 
 ### How to load this Chrome Extension
