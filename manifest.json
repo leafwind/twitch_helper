@@ -1,13 +1,15 @@
 {
   "name": "Twitch Helper",
+  "short_name": "Twitch Helper",
   "version": "0.0.4",
   "manifest_version": 2,
   "description": "圖奇小幫手：顯示各種有用資訊（目前有打卡次數及最後簽到日期）",
   "homepage_url": "http://bot.leafwind.tw",
+  "author": "leafwind.cs@gmail.com",
   "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
+    "16": "icons/yoshi_16.png",
+    "48": "icons/yoshi_48.png",
+    "128": "icons/yoshi_128.png"
   },
   "default_locale": "en",
   "background": {
