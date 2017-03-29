@@ -8,24 +8,25 @@ function getTwitchChatButtonAndInsertBeforeIt(twitch_helper_button) {
 
 }
 
-function getRealUserId(raw_user_id) {
-    if ( raw_user_id.endsWith(")") ) {
+function getRealUserId(raw_user_id_obj) {
+    var intl_login = raw_user_id_obj.find("span.intl-login").html();
+    if ( intl_login !== undefined ) {
         // has Asia Nickname
-        var user_id = raw_user_id.split('(')[1].split(')')[0]
-        console.warn("[Asia Nick Name] user id = " + user_id)
-        return user_id
+        var user_id = intl_login.split('(')[1].split(')')[0];
+        console.warn("[Asia Nick Name] user id = " + user_id);
+        return user_id;
     }
     else {
-        console.warn("[English ID] user id = " + raw_user_id)
-        return raw_user_id
+        var user_id = raw_user_id_obj.html();
+        console.warn("[English ID] user id = " + user_id);
+        return user_id;
     }
 }
 
 function setUserIdOnHelperButton(twitch_helper_button, channel) {
-    var selector = "div[class=chat-menu-content] > div[class=ember-view] > span[class=strong]"
+    var selector = "div.app-main > #left_col span.js-username"
     document.arrive(selector, {onceOnly: true, existing: true}, function() {
-        var raw_user_id_dom = $(selector)[0]
-        user_id = getRealUserId(raw_user_id_dom.innerText)
+        user_id = getRealUserId($(selector))
         $.get("https://bot.leafwind.tw/signin?user=" + user_id + "&channel=" + channel, function(data, status){
             twitch_helper_button.innerText = data.last_date + " / 第 " + data.count + " 次"
         });
